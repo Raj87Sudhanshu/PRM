@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard-style.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <div class="search-bar">
+                <input type="text" id="search" placeholder="Search...">
+                <button id="search-btn">Search</button>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <p id="current-user">User: Sudhanshu Raj</p>
+                <p id="user-nationality">Nationality: Indian</p>
+            </div>
+            <div class="current-time">
+                <p id="time"></p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h2>Welcome to Your Dashboard</h2>
+        <!-- Add more dashboard content here -->
+    </main>
+
+    <script>
+        // Script to update time
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('time').textContent = timeString;
+        }
+
+        setInterval(updateTime, 1000); // Update time every second
+        updateTime(); // Initialize time on page load
+    </script>
+</body>
+</html>
