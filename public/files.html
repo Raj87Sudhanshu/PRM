@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Files</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="navigation"></div>
+  <h1>Files</h1>
+  <div id="folders"></div>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Fetch and display folders and files
+    fetch('/files')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('folders').innerHTML = data.folders.map(folder => `
+          <div>
+            <h3>${folder.name}</h3>
+            <ul>
+              ${folder.files.map(file => `<li>${file}</li>`).join('')}
+            </ul>
+          </div>
+        `).join('');
+      });
+  </script>
+</body>
+</html>

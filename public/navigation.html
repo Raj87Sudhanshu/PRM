@@ -1,0 +1,14 @@
+<nav>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/files.html">Files</a>
+    <a href="/upgrade.html">Upgrade</a>
+    <a href="/about.html">About & Support</a>
+    <button onclick="logout()">Logout</button>
+  </nav>
+  
+  <script>
+    function logout() {
+      fetch('/logout', { method: 'POST' })
+        .then(() => window.location.href = '/login.html');
+    }
+  </script>

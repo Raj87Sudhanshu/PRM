@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="navigation"></div>
+  <h1>User Profile</h1>
+  <form id="profileForm">
+    <label>Name:</label>
+    <input type="text" id="name" required>
+    <label>Profile Picture URL:</label>
+    <input type="text" id="profilePicture">
+    <button type="submit">Update Profile</button>
+  </form>
+  <img id="profileImage" src="" alt="Profile Picture" width="100">
+  
+  <script>
+    fetch('/profile')
+      .then(response => response.json())
+      .then(user => {
+        document.getElementById('name').value = user.name;
+        document.getElementById('profilePicture').value = user.profilePicture;
+        document.getElementById('profileImage').src = user.profilePicture;
+      });
+
+    document.getElementById('profileForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const profilePicture = document.getElementById('profilePicture').value;
+
+      fetch('/profile', {
+        method: 'POST',
+        body: JSON.stringify({ name, profilePicture }),
+        headers: { 'Content-Type': 'application/json' },
+      }).then(() => alert('Profile updated successfully!'));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="navigation"></div>
+  <h1>Dashboard</h1>
+  <div id="recentFiles"></div>
+  <div id="storageCapacity"></div>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Fetch and display recent files and storage capacity
+    fetch('/recent-files')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('recentFiles').innerHTML = data.files.map(file => `
+          <div>
+            <p>${file.name} - ${file.date}</p>
+          </div>
+        `).join('');
+      });
+
+    fetch('/storage-capacity')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('storageCapacity').innerHTML = `
+          <p>Used: ${data.used} / Total: ${data.total}</p>
+        `;
+      });
+  </script>
+</body>
+</html>
